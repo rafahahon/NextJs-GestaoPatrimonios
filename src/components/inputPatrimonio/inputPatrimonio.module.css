@@ -1,0 +1,48 @@
+.table-section {
+    margin-top: 40px;
+    overflow-x: auto;
+}
+
+.environment-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 32px;
+}
+
+.environment-table th {
+    font-weight: 400;
+    color: var(--cor-texto);
+    padding-bottom: 16px;
+    border-bottom: 1px solid #cfd4da;
+    text-align: center;
+}
+
+.environment-table td {
+    background-color: #ffffff;
+    padding: 34px 24px;
+    text-align: center;
+    color: var(--cor-cinza);
+    font-size: 18px;
+}
+
+.environment-table tbody tr td:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.environment-table tbody tr td:last-child {
+    border-radius: 0 12px 12px 0;
+}
+
+.environment-table a {
+    color: #d71920;
+    font-size: 22px;
+}
+
+.environment-table tr.disabled a {
+    color: #e8a4a4;
+}
+
+.environment-table a:focus {
+    outline: 3px solid rgba(207, 41, 41, 0.35);
+    outline-offset: 3px;
+}
