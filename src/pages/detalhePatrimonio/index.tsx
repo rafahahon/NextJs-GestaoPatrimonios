@@ -1,6 +1,7 @@
 import styles from "./detalhePatrimonio.module.css"
 import Header from "@/components/header/header"
 import InputHistorico from "@/components/inputHistorico/inputHistorico"
+import ListaHistorico from "@/components/listaHistorico/listaHistorico"
 
 const DetalhePatrimonio = () => {
     return (
@@ -44,7 +45,12 @@ const DetalhePatrimonio = () => {
                     </article>
                 </section>
 
-                <InputHistorico />
+                {/* listaHistorico */}
+                <section className={`${styles.table_section} layout_guide`}
+                aria-label="Lista de histórico do patrimônio">
+                    <h2>Histórico</h2>
+                    <ListaHistorico />
+                </section>
 
             </main>
         </>

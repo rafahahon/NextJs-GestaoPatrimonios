@@ -1,6 +1,29 @@
 import styles from "./login.module.css"
+import { useState } from "react";
+import { login } from "../api/authService";
+import { useRouter } from "next/router";
 
 const Login = () => {
+
+    const [nif, setNif] = useState<string>("");
+    const [senha, setSenha] = useState<string>("");
+
+    const router = useRouter();
+
+    async function autenticar(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        try {
+            await login(nif, senha);
+            // notificacao("Bem-vindo(a)!")
+
+            setTimeout(() => {
+                router.push("/detalhePatrimonio");
+            }, 2000)
+        } catch(error: any) {
+            error("E-mail ou senha inválidos.")
+        }
+    }
+
     return (
         <main className={styles.login_page}>
             <section className={styles.login_banner} aria-label="Apresentação do sistema">
@@ -34,6 +57,7 @@ const Login = () => {
                             name="nif"
                             placeholder="Insira o seu NIF"
                             required
+                            value={nif} onChange={(e) => setNif(e.target.value)}
                         />
                     </div>
                     <div className={styles.form_group}>
@@ -45,6 +69,7 @@ const Login = () => {
                                 name="senha"
                                 placeholder="Insira a sua senha"
                                 required
+                                value={senha} onChange={(e) => setSenha(e.target.value)}
                             />
                             <button
                                 type="button"
