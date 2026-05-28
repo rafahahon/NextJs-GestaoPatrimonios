@@ -8,7 +8,6 @@ const ListaPatrimonioPorSala = () => {
             <Header></Header>
             <main className={styles.page_content}>
 
-                {/* INPUT */}
                 <ListaPatrimonio />
 
                 

@@ -1,22 +1,28 @@
+import Link from "next/link";
 import styles from "./inputPatrimonio.module.css"
 
-const InputPatrimonio = () => {
+type Patrimonio = {
+    numeroPatrimonio: string,
+    denominacao: string,
+    // dataTransferencia: 
+}
+
+const InputPatrimonio = ({numeroPatrimonio, denominacao}: Patrimonio) => {
     return (
         <>
             <tbody>
                 <tr className="">
-                    <td>1236808</td>
-                    <td>MESA TRAPEZOIDAL DC-1987a</td>
-                    <td>Mesa</td>
+                    <td>{numeroPatrimonio}</td>
+                    <td>{denominacao}</td>
                     <td>11/02/26</td>
                     <td>
-                        <a href="#" aria-label="Ver detalhes do patrimonio">
+                        <Link href="/detalhePatrimonio" aria-label="Ver detalhes do patrimônio">
                             <img src="/info.png" />
-                        </a>
+                        </Link>
                     </td>
                     <td>
-                        <a href="#" aria-label="Transferir patrimonio">
-                            <img src="/edit.png" />
+                        <a href="#" aria-label="Transferir patrimônio">
+                            <img src="/transferir.svg" />
                         </a>
                     </td>
                 </tr>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./header.module.css"
 
 const Header = () => {
@@ -10,16 +11,16 @@ const Header = () => {
                     </a>
                     <ul className={styles.menu_list}>
                         <li>
-                            <a href="#" className={styles.menu_link}>
+                            <Link href="/listaAmbientes" className={styles.menu_link}>
                                 Ambientes
                                 <img src="/setabaixo.png" />
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
-                            <a href="#" className={styles.menu_link}>
+                            <Link href="/listaPatrimoniosPorSala" className={styles.menu_link}>
                                 Patrimônios
-                            </a>
+                            </Link>
                         </li>
                     </ul>
 

@@ -1,16 +1,23 @@
+import Link from "next/link";
 import styles from "./inputAmbiente.module.css"
 
-const InputAmbiente = () => {
+type Ambiente = {
+    nomeLocal: string,
+    responsavel: string,
+}
+
+const InputAmbiente = ({nomeLocal, responsavel}: Ambiente) => {
     return (
         <>
             <tbody className={styles.environment_table}>
                 <tr>
-                    <td>Sala 30/31 (anfiteatro)</td>
-                    <td>Samanta Melissa</td>
+                    <td>{nomeLocal}</td>
+                    <td>{responsavel}</td>
                     <td>
-                        <a href="#" aria-label="Ver detalhes da Sala 30/31">
+                        {/* necessário criar detalheAmbiente */}
+                        <Link href="/" aria-label="Ver detalhes da Sala">
                             <img src="./info.png" alt="Ícone de detalhes" />
-                        </a>
+                        </Link>
                     </td>
                 </tr>
             </tbody>

@@ -1,7 +1,16 @@
 import InputAmbiente from "../inputAmbiente/inputAmbiente"
 import styles from "./listaAmbiente.module.css"
 
-const ListaAmbiente = () => {
+interface Ambiente {
+    localizacaoID: string,
+    nomeLocal: string,
+    localSAP: number,
+    descricaoSAP: string,
+    areaID: string,
+    responsavel: string
+}
+
+const ListaAmbiente = ({localizacaoID, nomeLocal, localSAP, descricaoSAP, areaID, responsavel}: Ambiente) => {
     return (
         <>
             <section
@@ -40,7 +49,12 @@ const ListaAmbiente = () => {
                             <th>Detalhes</th>
                         </tr>
                     </thead>
-                    <InputAmbiente></InputAmbiente>
+                    <InputAmbiente 
+                    key={localizacaoID}
+                    nomeLocal={nomeLocal}
+                    responsavel={responsavel}
+
+                    />
                 </table>
             </section>
 

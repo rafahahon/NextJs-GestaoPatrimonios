@@ -2,6 +2,7 @@ import styles from "./login.module.css"
 import { useState } from "react";
 import { login } from "../api/authService";
 import { useRouter } from "next/router";
+import { erro, notificacao } from "@/utils/toast";
 
 const Login = () => {
 
@@ -14,13 +15,13 @@ const Login = () => {
         e.preventDefault();
         try {
             await login(nif, senha);
-            // notificacao("Bem-vindo(a)!")
+            notificacao("Bem-vindo(a)!")
 
             setTimeout(() => {
                 router.push("/detalhePatrimonio");
             }, 2000)
         } catch(error: any) {
-            error("E-mail ou senha inválidos.")
+            erro("E-mail ou senha inválidos.")
         }
     }
 
@@ -47,7 +48,7 @@ const Login = () => {
                 </div>
             </section>
             <section className={styles.login_area} aria-label="Formulário de login">
-                <form className={styles.login_form}>
+                <form onSubmit={autenticar} className={styles.login_form}>
                     <h1>Login</h1>
                     <div className={styles.form_group}>
                         <label htmlFor="nif">NIF:</label>

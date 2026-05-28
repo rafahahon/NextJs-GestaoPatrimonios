@@ -1,7 +1,7 @@
 import styles from "./detalhePatrimonio.module.css"
 import Header from "@/components/header/header"
-import InputHistorico from "@/components/inputHistorico/inputHistorico"
 import ListaHistorico from "@/components/listaHistorico/listaHistorico"
+import Link from "next/link"
 
 const DetalhePatrimonio = () => {
     return (
@@ -12,10 +12,10 @@ const DetalhePatrimonio = () => {
                     className={`${styles.page_detalhes} layout_guide`}
                     aria-labelledby="titulo-patrimonio"
                 >
-                    <a href="#" className={styles.back_link}>
-                        <i className="fa-solid fa-arrow-left" />
+                    <Link href="/listaPatrimoniosPorSala" className={styles.back_link}>
+                        <img src="./setaD.png"/>
                         Voltar
-                    </a>
+                    </Link>
                     <h1 id={styles.titulo_patrimonio}>Patrimônio: 1236808</h1>
                     <article className={styles.patrimonio_card}>
                         <div className={styles.patrimonio_content}>
