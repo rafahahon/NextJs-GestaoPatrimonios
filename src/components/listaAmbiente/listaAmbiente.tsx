@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react"
 import InputAmbiente from "../inputAmbiente/inputAmbiente"
 import styles from "./listaAmbiente.module.css"
+import { listarAmbiente } from "@/pages/api/ambienteService"
+import { verificarAutenticacao } from "@/utils/auth"
 
 interface Ambiente {
     localizacaoID: string,
@@ -10,7 +13,40 @@ interface Ambiente {
     responsavel: string
 }
 
-const ListaAmbiente = ({localizacaoID, nomeLocal, localSAP, descricaoSAP, areaID, responsavel}: Ambiente) => {
+const ListaAmbiente = ({ localizacaoID, nomeLocal, localSAP, descricaoSAP, areaID, responsavel }: Ambiente) => {
+
+    const [ambientes, setAmbientes] = useState<Ambiente[]>([]);
+    const [ordem, setOrdem] = useState("todos");
+    const [pesquisa, setPesquisa] = useState("");
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
+
+    async function listar() {
+        try {
+            const lista = await listarAmbiente();
+
+            // erro ????
+            setAmbientes(lista);
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    }
+
+    useEffect(() => {
+        setEstaAutenticado(verificarAutenticacao());
+        listar();
+    })
+
+    const ambientesFiltragem = ambientes.filter((ambiente) => ambiente.nomeLocal.toLowerCase().includes(pesquisa.toLowerCase()))
+        .sort((a, b) => {
+            if (ordem === "A-Z") {
+                return a.nomeLocal.localeCompare(b.nomeLocal)
+            } else if (ordem === "Z-A") {
+                return b.nomeLocal.localeCompare(a.nomeLocal)
+            }
+
+            return 0;
+        });
+
     return (
         <>
             <section
@@ -22,18 +58,28 @@ const ListaAmbiente = ({localizacaoID, nomeLocal, localSAP, descricaoSAP, areaID
                         Pesquisar ambiente
                     </label>
                     <input
-                        type="search"
+                        type="text"
                         id={styles.pesquisa_ambiente}
                         name="pesquisaAmbiente"
                         placeholder="Pesquise o ambiente"
+                        value={pesquisa} onChange={(e) => { setPesquisa(e.target.value) }}
                     />
-                    <button
+                    {/* <button
                         type="button"
                         className={styles.filter_button}
                         aria-label="Filtrar ambientes"
                     >
                         <img src="/sliders.png" />
-                    </button>
+                    </button> */}
+                    <select
+                        className={styles.filter_button}
+                        value={ordem} onChange={(e) => setOrdem(e.target.value)}
+                        aria-label="Filtrar ambientes"
+                    >
+                        <option value="todos">Todos</option>
+                        <option value="A-Z">A-Z</option>
+                        <option value="Z-A">Z-A</option>
+                    </select>
                 </form>
             </section>
 
@@ -49,12 +95,16 @@ const ListaAmbiente = ({localizacaoID, nomeLocal, localSAP, descricaoSAP, areaID
                             <th>Detalhes</th>
                         </tr>
                     </thead>
-                    <InputAmbiente 
-                    key={localizacaoID}
-                    nomeLocal={nomeLocal}
-                    responsavel={responsavel}
+                    {ambientesFiltragem.length > 0 ? ambientesFiltragem.map((item) => (
+                        <InputAmbiente
+                            key={localizacaoID}
+                            nomeLocal={nomeLocal}
+                            responsavel={responsavel}
 
-                    />
+                        />
+                    )) : (
+                        <p>Carregando ambientes...</p>
+                    )}
                 </table>
             </section>
 

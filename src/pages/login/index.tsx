@@ -18,10 +18,10 @@ const Login = () => {
             notificacao("Bem-vindo(a)!")
 
             setTimeout(() => {
-                router.push("/detalhePatrimonio");
+                router.push("/listaPatrimoniosPorSala");
             }, 2000)
         } catch(error: any) {
-            erro("E-mail ou senha inválidos.")
+            erro("NIF ou senha inválidos.")
         }
     }
 

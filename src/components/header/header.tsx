@@ -13,7 +13,12 @@ const Header = () => {
                         <li>
                             <Link href="/listaAmbientes" className={styles.menu_link}>
                                 Ambientes
-                                <img src="/setabaixo.png" />
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="" className={styles.menu_link}>
+                                Aprovações
                             </Link>
                         </li>
 

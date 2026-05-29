@@ -1,6 +1,13 @@
 import styles from "./modal.module.css"
 
-const ModalImportar = () => {
+interface ModalProps {
+    isOpen: boolean;
+    onClose:() => void;
+    // children: React.ReactNode;
+ }
+
+const ModalImportar: React.FC<ModalProps> = ({isOpen, onClose}: ModalProps) => {
+    if(!isOpen) return null;
 
     return (
         <>
@@ -58,7 +65,9 @@ const ModalImportar = () => {
     )
 }
 
-const ModalTransferir = () => {
+const ModalTransferir: React.FC<ModalProps> = ({isOpen, onClose}: ModalProps) => {
+    if(!isOpen) return null;
+
     return (
         <>
             <section className={styles.modal_overlay}>
@@ -120,7 +129,8 @@ const ModalTransferir = () => {
     );
 }
 
-const ModalJustificativa = () => {
+const ModalJustificativa: React.FC<ModalProps> = ({isOpen, onClose}: ModalProps) => {
+    if(!isOpen) return null;
     return (
         <>
             <section className={styles.modal_overlay}>

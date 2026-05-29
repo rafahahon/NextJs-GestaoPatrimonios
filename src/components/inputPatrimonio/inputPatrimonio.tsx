@@ -1,29 +1,39 @@
 import Link from "next/link";
 import styles from "./inputPatrimonio.module.css"
+import { ModalImportar, ModalTransferir } from "../modals/modal";
+import { useState } from "react";
 
 type Patrimonio = {
-    numeroPatrimonio: string,
     denominacao: string,
-    // dataTransferencia: 
+    numeroPatrimonio: string,
+    patrimonioId: string,
+    dataTransferencia: string
 }
 
-const InputPatrimonio = ({numeroPatrimonio, denominacao}: Patrimonio) => {
+const InputPatrimonio = ({ numeroPatrimonio, denominacao, patrimonioId, dataTransferencia }: Patrimonio) => {
+
+    const [modalSelecionado, setModalSelecionado] = useState<boolean>(false);
+
     return (
         <>
             <tbody>
                 <tr className="">
                     <td>{numeroPatrimonio}</td>
                     <td>{denominacao}</td>
-                    <td>11/02/26</td>
+                    <td>{dataTransferencia}</td>
                     <td>
-                        <Link href="/detalhePatrimonio" aria-label="Ver detalhes do patrimônio">
+                        <Link href={"/detalhePatrimonio/" + patrimonioId} aria-label="Ver detalhes do patrimônio">
                             <img src="/info.png" />
                         </Link>
                     </td>
                     <td>
-                        <a href="#" aria-label="Transferir patrimônio">
+                        <button onClick={() => setModalSelecionado(true)}>
                             <img src="/transferir.svg" />
-                        </a>
+                        </button>
+                        <ModalTransferir
+                            isOpen={modalSelecionado}
+                            onClose={() => setModalSelecionado(false)}
+                        />
                     </td>
                 </tr>
             </tbody>
